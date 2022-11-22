@@ -9,7 +9,7 @@ class InfoDisplay{
     this.partName = partName;
   }
   
-  public void draw()
+  public void drawInfo()
   {
     fill(0);
     textSize(50);
