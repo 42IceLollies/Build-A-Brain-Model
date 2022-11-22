@@ -1,5 +1,7 @@
 class Label{
   
+  //This is all just for creating the labels on the left and making them functional, some of the methods had to be in the main tab, though, I'm not sure why it wasn't working
+  
   private int x;
   private int y;
   private String text;
@@ -10,7 +12,7 @@ class Label{
   private boolean clicked;
   private int txtSize;
   
-  
+  //constructor
   Label(int x, int y, int w, int h, String text, int code, Color fillColor)
   {
     this.x = x;
@@ -24,6 +26,7 @@ class Label{
     txtSize = regularTxt;
   }
   
+  //draws the label on the canvas
   public void drawLbl()
   {
     fill(fillColor.getR(), fillColor.getG(), fillColor.getB());

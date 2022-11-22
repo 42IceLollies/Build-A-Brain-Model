@@ -1,4 +1,5 @@
 class Color{
+  //I just used this so I didn't have to write out the RGB values for a color over and over again
   private int r;
   private int g;
   private int b;

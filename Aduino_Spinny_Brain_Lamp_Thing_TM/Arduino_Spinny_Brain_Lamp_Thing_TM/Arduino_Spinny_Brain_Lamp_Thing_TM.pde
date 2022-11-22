@@ -1,25 +1,22 @@
+   //runs in Processing IDE 
+   
+   
    import processing.serial.*;
   //creates serial port object
-  //UNCOMMENT 
-   //Serial myPort;
+  //UNCOMMENT FOR TESTING WITH ARDUINO (throws errors when there's nothing hooked up to the USB port) 
+  // Serial myPort;
    
    
    /*
    still need to:
-   -add what happens when you click on a square
-   -find/draw pictures to display sections of brain 
-   -sort of a landing page image of a brain, maybe animated?
-   
-   ideas for making it look cool
-   - circles or something around the cursor
-   -somehow make the labels not look like 2010s internet css
-   -color code labels to led colors? if we do the leds in colors, that is
-   -add white border to boxes once they've been clicked
+   -Display specific parts of brain w/ definitions
+   -Have it switch between definition pages when different buttons are clicked
+   -maybe add like a landing page like thing so that there's something there on the right side even when none of the buttons have been selected
+   -add white border to boxes when they've been clicked been clicked
    */
 
 
-//some global variables because if there's one thing I've learned, it's not to make yourself change a value twenty million times while formatting a program
-//Such learning abilities, brought to you by the basal ganglia. You're very welcome. 
+//some global variables
   int margin;
   int labelWidth;
   int labelHeight;
@@ -43,12 +40,12 @@ void setup()
   
   //UNCOMMENT
   
-  ////serial port setup, copied from https://learn.sparkfun.com/tutorials/connecting-arduino-to-processing/all
- // String portName = Serial.list()[0];
+  //serial port setup, copied from https://learn.sparkfun.com/tutorials/connecting-arduino-to-processing/all
+  //String portName = Serial.list()[0];
   //myPort = new Serial(this, portName, 9600);
   
   
-  //more settings, what did you expect for a function called setup?
+  //more settings
   background(0);
   colorMode(RGB);
   rectMode(CENTER);
@@ -79,7 +76,7 @@ void setup()
    7- occipital lobe
 */
 
-//do all the math beforehand so we don't have to do it repeatedly later
+//does all the math beforehand so we don't have to do it repeatedly later
 //*efficiency* 
   int rowOne = margin + (labelHeight/2);
   int rowTwo = 2* margin + (labelHeight/2) + labelHeight;
@@ -95,17 +92,18 @@ void setup()
 
 
   //initializes label 
-  sections[0] = new Label(colOne, rowOne, labelWidth, labelHeight, "Brainstem", 0, red);
-  sections[1] = new Label(colTwo, rowOne, labelWidth, labelHeight, "Frontal Lobe", 1, yellow);
-  sections[2] = new Label(colOne, rowTwo, labelWidth, labelHeight, "Diencephalon", 2, blue); // check the spelling on this, I don't think it's right
-  sections[3] = new Label(colTwo, rowTwo, labelWidth, labelHeight, "Limbic System", 3, blue);
-  sections[4] = new Label(colOne, rowThree, labelWidth, labelHeight, "Cerebellum", 4, blue);
-  sections[5] = new Label(colTwo, rowThree, labelWidth, labelHeight, "Parietal Lobe", 5, green);
-  sections[6] = new Label(colOne, rowFour, labelWidth, labelHeight, "Temporal Lobe", 6, green);
-  sections[7] = new Label(colTwo, rowFour, labelWidth, labelHeight, "Occipital Lobe", 7, green);
+  sections[0] = new Label(colOne, rowOne, labelWidth, labelHeight, "Brainstem", 1, blue);
+  sections[1] = new Label(colTwo, rowOne, labelWidth, labelHeight, "Frontal Lobe", 2, yellow);
+  sections[2] = new Label(colOne, rowTwo, labelWidth, labelHeight, "Diencephalon", 3, blue); // check the spelling on this, I don't think it's right
+  sections[3] = new Label(colTwo, rowTwo, labelWidth, labelHeight, "Limbic System", 4, red);
+  sections[4] = new Label(colOne, rowThree, labelWidth, labelHeight, "Cerebellum", 5, blue);
+  sections[5] = new Label(colTwo, rowThree, labelWidth, labelHeight, "Parietal Lobe", 6, green);
+  sections[6] = new Label(colOne, rowFour, labelWidth, labelHeight, "Temporal Lobe", 7, green);
+  sections[7] = new Label(colTwo, rowFour, labelWidth, labelHeight, "Occipital Lobe", 8, green);
   
  
  //initializes additional information for sections that will be displayed on the side
+ //whatever you want to put on the right side to define the terms can be put into an object (infoDisplay) and then it will be displayed when an object is clicked
  sectionInfo[0] = new InfoDisplay("Brainstem");
  sectionInfo[1] = new InfoDisplay("Frontal Lobe");
  sectionInfo[2] = new InfoDisplay("Diencephalon");
@@ -204,7 +202,7 @@ void draw()
       //If one of the buttons has been clicked on, searches for the button and makes adjustments
       if(clickedOn(curr, c))
       {
-        print(curr.getCode());
+       // print(curr.getCode());
         curr.toggleClick();
         sectionInfo[i].draw();
         
@@ -218,7 +216,9 @@ void draw()
           }
           
         //UNCOMMENT
-       // sendToPort(curr.getCode());
+        //sendToPort(curr.getCode());
+        
+        //add the code to switch between information on the left side here, I think
       } 
       
       

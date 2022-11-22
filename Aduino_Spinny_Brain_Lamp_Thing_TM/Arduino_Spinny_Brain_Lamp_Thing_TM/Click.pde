@@ -1,4 +1,5 @@
 class Click{
+  //holds x and y position where the cursor has been clicked
   private int x;
   private int y;
   
