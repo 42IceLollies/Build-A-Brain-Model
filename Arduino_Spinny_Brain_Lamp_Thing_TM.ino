@@ -1,4 +1,6 @@
 
+//runs in Arduino IDE
+
 /*
    -might need to mess with serial monitor timeout if there's a long time between clicking
 
