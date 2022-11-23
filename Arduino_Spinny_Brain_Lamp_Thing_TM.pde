@@ -4,7 +4,7 @@
    import processing.serial.*;
   //creates serial port object
   //UNCOMMENT FOR TESTING WITH ARDUINO (throws errors when there's nothing hooked up to the USB port) 
-  // Serial myPort;
+  //Serial myPort;
    
    
    /*
@@ -23,7 +23,7 @@
   
 
   Label[] sections = new Label[8]; 
-  InfoDisplay[] sectionInfo = new InfoDisplay[8];
+  InfoDisplay[] sectionInfo = new InfoDisplay[29]; //changed from 8 to 29, might be wrong but easy fix
   
   //text setting vars
   int regularTxt;
@@ -94,7 +94,7 @@ void setup()
   //initializes label 
   sections[0] = new Label(colOne, rowOne, labelWidth, labelHeight, "Brainstem", 1, blue);
   sections[1] = new Label(colTwo, rowOne, labelWidth, labelHeight, "Frontal Lobe", 2, yellow);
-  sections[2] = new Label(colOne, rowTwo, labelWidth, labelHeight, "Diencephalon", 3, blue);
+  sections[2] = new Label(colOne, rowTwo, labelWidth, labelHeight, "Diencephalon", 3, blue); 
   sections[3] = new Label(colTwo, rowTwo, labelWidth, labelHeight, "Limbic System", 4, red);
   sections[4] = new Label(colOne, rowThree, labelWidth, labelHeight, "Cerebellum", 5, blue);
   sections[5] = new Label(colTwo, rowThree, labelWidth, labelHeight, "Parietal Lobe", 6, green);
@@ -104,47 +104,44 @@ void setup()
  
  //initializes additional information for sections that will be displayed on the side
  //whatever you want to put on the right side to define the terms can be put into an object (infoDisplay) and then it will be displayed when an object is clicked
+ sectionInfo[0] = new InfoDisplay("Brainstem: The foundation and oldest part of the brain. Responsible for most vital bodily functions, including autonomic reflexes and consciousness.");
+ sectionInfo[1] = new InfoDisplay("Medulla Oblongata: Serves as the main connection between the brain and the Autonomic Nervous system, and both Sympathetic and Parasympathetic nervous systems. Responsible for all autonomous functions including body temperature, heart rate, and blood pressure.");
+ sectionInfo[2] = new InfoDisplay("Pons: Serve as a relay station between the cerebral cortex and the cerebellum and processes brainwaves during sleep. Vital because the Cerebral Cortex is responsible for many higher level functions such as critical thought, hearing, sensation, and sight, while the Cerebellum is responsible for muscular coordination and balance.");
+ sectionInfo[3] = new InfoDisplay("Reticular Formation: Responsible for arousal and determining whether you are awake or asleep. Fires electrical signals all over the brain to alert you to your surroundings and wake you up once the cerebral cortex ignites.");
 
-  sectionInfo[0] = new InfoDisplay("Brainstem: The foundation and oldest part of the brain. Responsible for most vital bodily functions, including autonomic reflexes and consciousness.");
- sectionInfo[0] = new InfoDisplay("Medulla Oblongata: Serves as the main connection between the brain and the Autonomic Nervous system, and both Sympathetic and Parasympathetic nervous systems. Responsible for all autonomous functions including body temperature, heart rate, and blood pressure.");
- sectionInfo[0] = new InfoDisplay("Pons: Serve as a relay station between the cerebral cortex and the cerebellum and processes brainwaves during sleep. Vital because the Cerebral Cortex is responsible for many higher level functions such as critical thought, hearing, sensation, and sight, while the Cerebellum is responsible for muscular coordination and balance.");
- sectionInfo[0] = new InfoDisplay("Reticular Formation: Responsible for arousal and determining whether you are awake or asleep. Fires electrical signals all over the brain to alert you to your surroundings and wake you up once the cerebral cortex ignites.");
+ sectionInfo[4] = new InfoDisplay("Frontal Lobe: Responsible for planning movement, decision making and general planning");
+ sectionInfo[5] = new InfoDisplay("Prefrontal Cortex: Responsible for decision making, critical thinking, personality formation, and emotional processing.");
+ sectionInfo[6] = new InfoDisplay("Basal Ganglia: Connects the cerebral cortex, thalamus, and cerebellum. Responsible for reward processing/production, habit formation, learning and movement.");
+ sectionInfo[7] = new InfoDisplay("Broca's Area: Responsible for speech production and articulation.");
 
- sectionInfo[1] = new InfoDisplay("Frontal Lobe: Responsible for planning movement, decision making and general planning");
- sectionInfo[1] = new InfoDisplay("Prefrontal Cortex: Responsible for decision making, critical thinking, personality formation, and emotional processing.");
- sectionInfo[1] = new InfoDisplay("Basal Ganglia: Connects the cerebral cortex, thalamus, and cerebellum. Responsible for reward processing/production, habit formation, learning and movement.");
- sectionInfo[1] = new InfoDisplay("Broca's Area: Responsible for speech production and articulation.");
+ sectionInfo[8] = new InfoDisplay("Diencephalon: Serves as a relay for sensory information and autonomic control.");
+ sectionInfo[9] = new InfoDisplay("Thalamus: Serves as a relay for sensory input to the rest of the brain, directs it to the intended destination. (Does not directly manage smell).");
+ sectionInfo[10] = new InfoDisplay("Hypothalamus: Responsible for the basic survival behaviors known as the 4-F’s, fighting, flighting, feeding, and reproduction.");
 
- sectionInfo[2] = new InfoDisplay("Diencephalon: Serves as a relay for sensory information and autonomic control.");
- sectionInfo[2] = new InfoDisplay("Thalamus: Serves as a relay for sensory input to the rest of the brain, directs it to the intended destination. (Does not directly manage smell).");
- sectionInfo[2] = new InfoDisplay("Hypothalamus: Responsible for the basic survival behaviors known as the 4-F’s, fighting, flighting, feeding, and reproduction.");
-  
- sectionInfo[3] = new InfoDisplay("Limbic System: Barrier between the primal brain and the cerebral cortex");
- sectionInfo[3] = new InfoDisplay("Amygdala: Responsible for basic emotional behaviors and serves as the body’s fear switch.");
- sectionInfo[3] = new InfoDisplay("Hippocampus: Processes memories by turning short term memories into long term memories. Also makes complex synaptic connections to every region of the brain to encode information.");
- sectionInfo[3] = new InfoDisplay("Ventral Tegmental Pathway: Regulates reward consumption, learning, memory and addictive behaviors by controlling dopamine release.");
+ sectionInfo[11] = new InfoDisplay("Limbic System: Barrier between the primal brain and the cerebral cortex");
+ sectionInfo[12] = new InfoDisplay("Amygdala: Responsible for basic emotional behaviors and serves as the body’s fear switch.");
+ sectionInfo[13] = new InfoDisplay("Hippocampus: Processes memories by turning short term memories into long term memories. Also makes complex synaptic connections to every region of the brain to encode information.");
+ sectionInfo[14] = new InfoDisplay("Ventral Tegmental Pathway: Regulates reward consumption, learning, memory and addictive behaviors by controlling dopamine release.");
 
- sectionInfo[4] = new InfoDisplay("Cerebellum: Responsible for muscular coordination and balance, three regions.");
- sectionInfo[4] = new InfoDisplay("Cerebrocerebellum: Plans movement.");
- sectionInfo[4] = new InfoDisplay("Spinocerebellum: Corrects movement");
- sectionInfo[4] = new InfoDisplay("Vestibulocerebellum: Helps with maintaining balance and eye tracking.");
+ sectionInfo[15] = new InfoDisplay("Cerebellum: Responsible for muscular coordination and balance, three regions.");
+ sectionInfo[16] = new InfoDisplay("Cerebrocerebellum: Plans movement.");
+ sectionInfo[17] = new InfoDisplay("Spinocerebellum: Corrects movement");
+ sectionInfo[18] = new InfoDisplay("Vestibulocerebellum: Helps with maintaining balance and eye tracking.");
+ 
+ sectionInfo[19] = new InfoDisplay("Parietal Lobe: Responsible for processing sensations, evaluating how outside forces feel, the position of limbs in space and the amount of pressure to place on an object.");
+ sectionInfo[20] = new InfoDisplay("Primary Somatosensory Cortex: Directly receives sensory input from the Thalamus and transmits it to the mortar cortex to evaluate sensations and plan responses.");
+ sectionInfo[21] = new InfoDisplay("Secondary Somatosensory Area: Takes information from the S1 and compares it to past sensory patterns you experienced");
 
- sectionInfo[5] = new InfoDisplay("Parietal Lobe: Responsible for processing sensations, evaluating how outside forces feel, the position of limbs in space and the amount of pressure to place on an object.");
- sectionInfo[5] = new InfoDisplay("Primary Somatosensory Cortex: Directly receives sensory input from the Thalamus and transmits it to the mortar cortex to evaluate sensations and plan responses.");
- sectionInfo[5] = new InfoDisplay("Secondary Somatosensory Area: Takes information from the S1 and compares it to past sensory patterns you experienced");
+ sectionInfo[22] = new InfoDisplay("Temporal Lobe: Responsible for memory, emotional responses, auditory understanding and language production.");
+ sectionInfo[23] = new InfoDisplay("Primary Auditory Cortex: Directly receives sound and determines the quality of it");
+ sectionInfo[24] = new InfoDisplay("Auditory Association Area: Processes sound from the A1 and compares it to what you've heard.");
 
- sectionInfo[6] = new InfoDisplay("Temporal Lobe: Responsible for memory, emotional responses, auditory understanding and language production.");
- sectionInfo[6] = new InfoDisplay("Primary Auditory Cortex: Directly receives sound and determines the quality of it");
- sectionInfo[6] = new InfoDisplay("Auditory Association Area: Processes sound from the A1 and compares it to what you've heard.");
-
- sectionInfo[7] = new InfoDisplay("Occipital Lobe: Responsible for processing what you see.");
- sectionInfo[7] = new InfoDisplay("Visual Cortex: Immediately identifies the basic data(Shapes/Shadows) of what you see.");
- sectionInfo[7] = new InfoDisplay("Ventral Stream: Surrounds and supports the V1 to determine color, movement, and depth perception of an object and compares to what you've already seen.");
- sectionInfo[7] = new InfoDisplay("Fusiform Face Area/Gyrus: Responsible for recognizing faces and people.");
-
+ sectionInfo[25] = new InfoDisplay("Occipital Lobe: Responsible for processing what you see.");
+ sectionInfo[26] = new InfoDisplay("Visual Cortex: Immediately identifies the basic data(Shapes/Shadows) of what you see.");
+ sectionInfo[27] = new InfoDisplay("Ventral Stream: Surrounds and supports the V1 to determine color, movement, and depth perception of an object and compares to what you've already seen.");
+ sectionInfo[28] = new InfoDisplay("Fusiform Face Area/Gyrus: Responsible for recognizing faces and people.");
 
 }
-
 
 
 
