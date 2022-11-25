@@ -11,7 +11,7 @@
    4) see if we have enough time to make it spin
 */
 //light pins
-int sections[8] = {53, 49, 43, 37, 33, 31, 27, 23};
+int sections[8] = {2, 8, 5, 6, 4, 10, 11, 13};
 /*
    0- brainstem
    1- cerebellum
